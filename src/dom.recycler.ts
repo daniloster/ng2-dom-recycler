@@ -129,6 +129,8 @@ function getDynamicDomRecycler(selector: string, selectorItem: string) {
                     ? totalBufferMargin
                     : diffOffBottomView;
                 end = start + totalSlicesElements;
+            } else if (start >= 0) {
+                end = totalItems;
             } else {
                 start = undefined;
                 end = totalItems;

@@ -2,37 +2,10 @@ import { ViewRef, Component, OnInit, Input, Output, Injectable } from '@angular/
 import { Github } from '../shared/github';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
+import { Repo } from './repo';
+import { RepoContentItem, selector as repoSelector } from './repo-content-item';
+import { Repo2ContentItem, selector as repo2Selector } from './repo2-content-item';
 import { getDynamicDomRecycler } from '../../../../src/dom.recycler';
-
-interface Repo {
-    id: number;
-    name: string;
-    full_name: string;
-    private: boolean;
-}
-
-@Component({
-    selector: 'repo-content-item',
-    styles: [`
-        .repo-content {
-            height: 115px;
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-    `],
-    template: `
-        <div class="repo-content">
-            <h3>{{ item.full_name }}</h3>
-            <div>{{ item.id }}</div>
-            <div>{{ item.name }}</div>
-            <div>{{ item.private }}</div>
-        </div>
-    `
-})
-class RepoComponent {
-    @Input() item: Repo
-}
 
 @Component({
     selector: 'repo-list',
@@ -50,12 +23,24 @@ class RepoComponent {
             <repos-recycler
                 [items]="items"
                 [itemHeight]="115"
-                [totalBufferMargin]="5"
+                [totalBufferMargin]="3"
             ></repos-recycler>
         </div>
 
+        <br />
+        <br />
+
+        <h3>Repo2 list</h3>
+        <div *ngIf="!!items" class="repo-container">
+            <repos2-recycler
+                [items]="items"
+                [itemHeight]="22"
+                [totalBufferMargin]="3"
+            ></repos2-recycler>
+        </div>
+
         <router-outlet></router-outlet>
-    `,
+    `
 })
 class RepoList implements OnInit {
     org: string;
@@ -77,8 +62,11 @@ class RepoList implements OnInit {
     }
 }
 
-const ReposRecycler = getDynamicDomRecycler('repos-recycler', 'repo-content-item');
+const ReposRecycler = getDynamicDomRecycler('repos-recycler', repoSelector);
+const Repos2Recycler = getDynamicDomRecycler('repos2-recycler', repo2Selector);
 
 export { RepoList };
 export { ReposRecycler };
-export { RepoComponent };
+export { Repos2Recycler };
+export { RepoContentItem };
+export { Repo2ContentItem };
