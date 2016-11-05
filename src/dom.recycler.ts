@@ -129,6 +129,7 @@ function getDynamicDomRecycler(selector: string, selectorItem: string) {
                     ? totalBufferMargin
                     : diffOffBottomView;
                 end = start + totalSlicesElements;
+            /* Fixing glitch on scrolling event for angular2 */
             } else if (start >= 0) {
                 end = totalItems;
             } else {
