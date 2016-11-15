@@ -79,7 +79,7 @@ function getDynamicDomRecycler(selector: string, selectorItem: string) {
                 this.totalBufferMargin);
             const isWindow = container.tagName === undefined;
             const isOutOfScope = (container.scrollTop > this.items.length * this.itemHeight);
-            if (isWindow || !isOutOfScope && ((start !== undefined && start !== this.start) || end !== this.end)) {
+            if (isWindow || !isOutOfScope && (start !== this.start || end !== this.end)) {
                 this.start = start || 0;
                 this.end = end;
                 this.viewportItems = this.items.slice(start, end);
@@ -131,9 +131,6 @@ function getDynamicDomRecycler(selector: string, selectorItem: string) {
                 end = start + totalSlicesElements;
             /* Fixing glitch on scrolling event for angular2 */
             } else if (start >= 0) {
-                end = totalItems;
-            } else {
-                start = undefined;
                 end = totalItems;
             }
             return {
