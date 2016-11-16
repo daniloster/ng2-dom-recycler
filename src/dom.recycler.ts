@@ -7,7 +7,6 @@ function getDynamicDomRecycler(selector: string, selectorItem: string) {
         styles: [`
             .dom-recycler-container {
                 position: relative;
-                max-height:100%;
                 height:100%;
                 box-sizing: border-box;
                 overflow-y: scroll;
