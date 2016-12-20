@@ -135,4 +135,5 @@ export class AppModule {
 * In your terminal, go to your project's folder
 * Execute "npm install"
 * Then, "npm start"
-* Access [http://localhost:3000/](http://localhost:3000/)
+* Access [http://localhost:3000/about](http://localhost:3000/about)
+* Acessing /home is going to crash your browser trying to render 100k items in a list without dom recycler
